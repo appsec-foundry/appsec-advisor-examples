@@ -1,104 +1,106 @@
 # appsec-advisor examples
 
-Example outputs from [appsec-advisor](https://github.com/appsec-foundry/appsec-advisor),
-a Claude Code plugin for code-derived threat modeling: it reads the code and
-configuration in a repository, builds an architecture model, and runs STRIDE
-against it.
+Example outputs of [appsec-advisor](https://github.com/appsec-foundry/appsec-advisor),
+a Claude Code plugin that builds a threat model from a repository's code and
+configuration: it derives the architecture and runs STRIDE against it.
 
-This repository is the companion to the plugin's own
+This repository complements the plugin's own
 [`examples/threat-modeler`](https://github.com/appsec-foundry/appsec-advisor/tree/dev/examples/threat-modeler)
-directory and carries additional targets, depths and historical runs. Use the
-reports to see the report structure, depth levels and artifact formats before
-running a scan of your own.
+directory with more targets and depths. The reports show what the output looks
+like before you run a scan yourself.
 
-## What's here
+## Files
 
-All runs live in [`threat-modeler/`](threat-modeler/). Each run produces a set
-of files that share a common slug `threat-model-<target>-<depth>-v<version>`:
+All runs are in [`threat-modeler/`](threat-modeler/). The files of one run share
+the name `threat-model-<target>-<depth>-v<version>`. The version suffix is the
+plugin release (`b4` is beta 4), so runs from different releases can sit side by
+side.
 
-| Report formats | Data and integration formats |
-|----------------|------------------------------|
-| `.md` — human-readable report | `.yaml` — structured model |
-| `.html` — browser-readable report | `.sarif.json` — SARIF v2.1 code-scanning results |
-| `.pdf` — printable report with cover and TOC | `.threatdragon.json` — Threat Dragon and ThreatAtlas export |
-| `.figure1.svg`, `.figure2.svg` — figures shown in the report | `pentest-tasks-*.yaml` — endpoint catalog and pentest plan |
+- `.md`, `.html`, `.pdf`: the report
+- `.figure1.svg`, `.figure2.svg`: the figures used in the report
+- `.yaml`: the structured model, including plugin version, models and
+  invocation in its `meta` block
+- `.sarif.json`: code-scanning results (SARIF 2.1)
+- `.threatdragon.json`: export for Threat Dragon and ThreatAtlas
+- `pentest-tasks-*.yaml`: endpoint catalog and pentest plan
 
-Optional outputs are linked for each run below when they were generated.
+Not every run has all of these. Only the thorough Juice Shop run was exported
+to HTML, PDF, SARIF and Threat Dragon.
 
-The `-v<version>` suffix names the plugin release a run belongs to (`b4` =
-beta 4), so outputs from different releases stay side by side and comparable.
-Each YAML file records the exact plugin version, models and invocation in its
-`meta` block.
+## Models
+
+The standard runs use Claude Sonnet 4.6 as orchestrator and for the STRIDE
+analysis. Triage and merging of findings run on Claude Sonnet 5. The thorough
+run uses Claude Opus throughout.
 
 ## Examples
 
-**[OWASP Juice Shop](https://owasp.org/www-project-juice-shop/)** — deliberately
-insecure web shop, v20.1.1 in all runs:
+### OWASP Juice Shop
 
-- **Tech stack:** Angular, Node.js, Express, Socket.IO, Sequelize, SQLite, Docker.
-- **[Standard](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.md)** —
-  Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 · 🔴 6 Critical ·
-  🟠 42 High · 🟡 23 Medium · 71 total, reporting threshold medium.
-  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.yaml).
-- **[Thorough](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.md)** —
-  Model: Claude Opus · 🔴 6 Critical · 🟠 24 High · 🟡 36 Medium · 66 total.
-  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.yaml) ·
-  [HTML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.html) ·
-  [PDF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.pdf) ·
-  [SARIF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.sarif.json) ·
-  [Threat Dragon](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.threatdragon.json).
-- **[Pentest tasks](threat-modeler/pentest-tasks-juice-shop-thorough-v0.6.0b4.yaml)** —
+[Juice Shop](https://owasp.org/www-project-juice-shop/) is a deliberately
+insecure web shop (version 20.1.1 in all runs). Stack: Angular, Node.js,
+Express, Socket.IO, Sequelize, SQLite, Docker.
+
+- [Standard run](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.md):
+  6 critical, 42 high, 23 medium, 71 findings in total. Also available as
+  [YAML](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.yaml).
+- [Thorough run](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.md):
+  6 critical, 24 high, 36 medium, 66 findings in total. Also available as
+  [YAML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.yaml),
+  [HTML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.html),
+  [PDF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.pdf),
+  [SARIF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.sarif.json)
+  and [Threat Dragon](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.threatdragon.json).
+- [Pentest tasks](threat-modeler/pentest-tasks-juice-shop-thorough-v0.6.0b4.yaml):
   endpoint catalog and pentest plan in the Strix dialect for
-  `http://localhost:3000`, exported from the
-  [thorough run](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.md).
+  `http://localhost:3000`, exported from the thorough run.
 
-**[OWASP VulnerableApp](https://github.com/SasanLabs/VulnerableApp)** —
-vulnerable application for demonstrating and testing security issues:
+### OWASP VulnerableApp
 
-- **Tech stack:** Java, Spring Boot, JSP, PHP.
-- **[Standard](threat-modeler/threat-model-owasp-vulnerableapp-v0.6.0b4.md)** —
-  Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 ·
-  🔴 4 Critical · 🟠 23 High · 🟡 21 Medium · 48 total, reporting threshold medium.
-  Artifacts: [YAML](threat-modeler/threat-model-owasp-vulnerableapp-v0.6.0b4.yaml).
+[VulnerableApp](https://github.com/SasanLabs/VulnerableApp) is an application
+for demonstrating and testing security issues. Stack: Java, Spring Boot, JSP,
+PHP.
+
+- [Standard run](threat-modeler/threat-model-owasp-vulnerableapp-v0.6.0b4.md):
+  4 critical, 23 high, 21 medium, 48 findings in total. Also available as
+  [YAML](threat-modeler/threat-model-owasp-vulnerableapp-v0.6.0b4.yaml).
+
+### Insecure Large Spring App
+
+The files `threat-model-insecure-large-spring-app-*` come from
+[Insecure Large Spring App](https://github.com/matthiasrohr/insecure-large-spring-app),
+a repository built to test how the process copes with many components. It
+defines 42 Docker Compose services in 7 network zones.
+
+The standard run models 21 components and 124 entry points. 14 components get a
+full STRIDE analysis. The other 7 are out of scope at standard depth and are
+listed in the report under "Components Not Individually Analyzed". Result: 13
+critical, 40 high, 16 medium, 69 findings in total.
+
+Files: [report](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.md),
+[YAML](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.yaml),
+[figure 1 (architecture)](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.figure1.svg),
+[figure 2 (risk flow)](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.figure2.svg).
+
+All counts exclude low and informational findings (reporting threshold medium).
 
 ## Assessment depths
 
-For component coverage criteria, cost, and runtime guidance, see
+Coverage, cost and runtime of each depth are described under
 [Assessment depth & cost control](https://github.com/appsec-foundry/appsec-advisor/blob/main/docs/threat-modeler.md#assessment-depth--cost-control).
 
-- **quick** — early feedback and low-risk changes; reduced analysis that skips
-  abuse-case validation and final model-based QA.
-- **standard** *(default)* — normal threat models and security reviews; full
-  analysis, abuse-case validation, and QA.
-- **thorough** — high-risk services and major releases; deeper component
-  analysis and architecture review.
+- quick: early feedback and low-risk changes. Skips abuse-case validation and
+  the final model-based QA.
+- standard (default): the usual choice. Full analysis, abuse-case validation
+  and QA.
+- thorough: for high-risk services and major releases. Deeper component
+  analysis and an architecture review.
 
-## Large-component-count test fixture
+## Running it yourself
 
-Files matching `threat-model-insecure-large-spring-app-*` were generated from
-the custom-built
-[Insecure Large Spring App](https://github.com/matthiasrohr/insecure-large-spring-app)
-repository. The fixture was built to test how the threat-modeling process
-handles applications with a large number of components.
-
-The repository defines 42 Docker Compose services across 7 network zones. The
-standard run (Claude Sonnet 4.6, triage and merge on Claude Sonnet 5)
-represents the system as 21 logical components, identifies 124 entry points and
-performs full STRIDE analysis on 14 components. The other 7 are listed under
-"Components Not Individually Analyzed" because they are out of scope at
-standard depth. 🔴 13 Critical · 🟠 40 High · 🟡 16 Medium · 69 total,
-reporting threshold medium.
-
-Artifacts: [report](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.md) ·
-[YAML](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.yaml) ·
-[figure 1: architecture](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.figure1.svg) ·
-[figure 2: risk flow](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.figure2.svg).
-
-## Run it yourself
-
-Install the plugin as described in the appsec-advisor
+Install the plugin as described in the
 [Quick start](https://github.com/appsec-foundry/appsec-advisor#quick-start),
-then run `/appsec-advisor:create-threat-model` from Claude Code in the
-repository you want to model. The `meta.invocation` field of each YAML file
-shows the options a run used; the thorough Juice Shop run, for example, used
+then run `/appsec-advisor:create-threat-model` in Claude Code from the
+repository you want to model. The `meta.invocation` field in each YAML file
+shows which options a run used. The thorough Juice Shop run, for example, used
 `--thorough --sarif --pentest-tasks --pentest-format strix --pentest-target http://localhost:3000 --threatdragon --pdf --html`.

@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1330" height="780" viewBox="0 0 1330 780" font-family="Helvetica, Arial, sans-serif" data-figure2-version="2" data-glyphs="1 2 3 4 5 2 3 2 3" role="img" aria-labelledby="f2-title"><title id="f2-title">Actors, attack routes, underlying weaknesses and impact</title><metadata id="figure2-data">{&quot;routes&quot;: [{&quot;actor&quot;: &quot;Anonymous Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Disclosure of customer information&quot;, &quot;component&quot;: &quot;C-02 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;Authentication bypass via SQL injection: attacker authenticates as any existing user including privileged accounts. Under stated conditions (synthetic test data) no material business harm; technically complete credential bypass is achievable.&quot;, &quot;finding_id&quot;: &quot;F-001&quot;, &quot;finding_ids&quot;: [&quot;F-001&quot;, &quot;F-007&quot;, &quot;F-016&quot;, &quot;F-042&quot;], &quot;number&quot;: 1, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;Critical&quot;, &quot;route&quot;: &quot;Attacker submits username `&#x27; OR &#x27;1&#x27;=&#x27;1&#x27; --` and any password string to the POST /authentication Level 1 endpoint.&quot;, &quot;title&quot;: &quot;Inject Input into Server Interpreters&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Anonymous Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-08 · Ollama LLM Runtime&quot;, &quot;consequence&quot;: &quot;Any internet-reachable host can invoke the complete Ollama REST API: enumerate loaded models, perform unrestricted inference, delete or replace models, and exhaust GPU/CPU resources. The embedding model nomic-embed-text is equally exposed, enabling adversarial embedding queries. No LLMForge-level rate limiting, prompt control, or authentication applies to direct API calls.&quot;, &quot;finding_id&quot;: &quot;F-006&quot;, &quot;finding_ids&quot;: [&quot;F-006&quot;, &quot;F-009&quot;, &quot;F-013&quot;, &quot;F-019&quot;, &quot;F-020&quot;, &quot;F-027&quot;, &quot;F-030&quot;], &quot;number&quot;: 2, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;Critical&quot;, &quot;route&quot;: &quot;Attacker scans the target host IP on port 11434 and receives HTTP 200 from GET /api/tags, confirming an unauthenticated Ollama API and obtaining the list of loaded models.&quot;, &quot;title&quot;: &quot;Bypass or Forge Authentication&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;Endpoints are reachable without enforced authentication (W-001)&quot;, &quot;weakness_ids&quot;: [&quot;W-001&quot;]}, {&quot;actor&quot;: &quot;Anonymous Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data&quot;, &quot;component&quot;: &quot;C-07 · LLMForge (LLM Adapter Service)&quot;, &quot;consequence&quot;: &quot;Any caller can invoke privileged LLMForge operations (document ingestion, deletion, model management, admin APIs) without holding the required identity or role, allowing horizontal and vertical privilege escalation across the entire LLM service.&quot;, &quot;finding_id&quot;: &quot;F-004&quot;, &quot;finding_ids&quot;: [&quot;F-004&quot;, &quot;F-026&quot;, &quot;F-031&quot;], &quot;number&quot;: 3, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;High&quot;, &quot;route&quot;: &quot;Authenticated low-privilege user discovers the RAG admin endpoint (e.g., /admin/ingest or /documents/delete) through API enumeration.&quot;, &quot;title&quot;: &quot;Bypass Authorization to Gain Access&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Anonymous Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Disclosure of customer information&quot;, &quot;component&quot;: &quot;C-02 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;RSA private key extractable from the packaged keystore using the disclosed password, enabling JWT forgery for RS256-signed tokens. Under stated conditions (demonstration keys, training app) no material business harm; signing keys are not used in production.&quot;, &quot;finding_id&quot;: &quot;F-019&quot;, &quot;finding_ids&quot;: [&quot;F-015&quot;, &quot;F-018&quot;, &quot;F-019&quot;, &quot;F-023&quot;, &quot;F-029&quot;, &quot;F-034&quot;, &quot;F-043&quot;, &quot;F-044&quot;], &quot;number&quot;: 4, &quot;prerequisite&quot;: &quot;No account required; Public source available&quot;, &quot;risk&quot;: &quot;High&quot;, &quot;route&quot;: &quot;The PKCS#12 keystore password `changeIt` is committed as a string literal at JWTAlgorithmKMS.java:41; any actor with read access to the repository can extract the RSA private key from the packaged `sasanlabs.p12` file using this credential, enabling offline JWT forgery for any algorithm that uses the RS256 key.&quot;, &quot;title&quot;: &quot;Access Exposed Data and Secrets&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;Secrets are committed to source instead of a managed store (W-004)&quot;, &quot;weakness_ids&quot;: [&quot;W-004&quot;]}, {&quot;actor&quot;: &quot;Anonymous Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Service disruption or compromise of application data&quot;, &quot;component&quot;: &quot;C-01 · VulnerableApp Backend (Spring Boot)&quot;, &quot;consequence&quot;: &quot;Technical consequence not established.&quot;, &quot;finding_id&quot;: &quot;F-016&quot;, &quot;finding_ids&quot;: [&quot;F-016&quot;], &quot;number&quot;: 5, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;High&quot;, &quot;route&quot;: &quot;Request data concatenated into a shell/exec argument yields arbitrary command execution.&quot;, &quot;title&quot;: &quot;OS command injection via unsanitized input&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Authenticated Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-user&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-02 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;Session hijacking: attacker impersonates any recently logged-in Level 2 user. Under stated conditions (synthetic test accounts) no material business harm; technically full impersonation of any concurrent session is achievable.&quot;, &quot;finding_id&quot;: &quot;F-008&quot;, &quot;finding_ids&quot;: [&quot;F-008&quot;], &quot;number&quot;: 2, &quot;prerequisite&quot;: &quot;Regular account required&quot;, &quot;risk&quot;: &quot;High&quot;, &quot;route&quot;: &quot;Attacker logs in to the Level 2 endpoint and observes the issued session ID, e.g., SESSION-1042.&quot;, &quot;title&quot;: &quot;Bypass or Forge Authentication&quot;, &quot;unproven&quot;: true, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;Security-sensitive data uses weak cryptographic primitives (W-005)&quot;, &quot;weakness_ids&quot;: [&quot;W-005&quot;]}, {&quot;actor&quot;: &quot;Authenticated Internet Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-user&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data&quot;, &quot;component&quot;: &quot;C-02 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;Authenticated attacker elevates their own role to admin by modifying the client-side cookie. Under stated conditions only synthetic roles in a training app are affected; no material business harm. Technically any role claim in the cookie can be tampered to gain administrative privileges.&quot;, &quot;finding_id&quot;: &quot;F-024&quot;, &quot;finding_ids&quot;: [&quot;F-022&quot;, &quot;F-024&quot;], &quot;number&quot;: 3, &quot;prerequisite&quot;: &quot;Regular account required&quot;, &quot;risk&quot;: &quot;High&quot;, &quot;route&quot;: &quot;Level 3 login stores the authenticated user&#x27;s role as a plaintext value in the `role_level3` cookie without any integrity protection at IDORLoginController.java:141; an authenticated user replaces the cookie value with `admin` and any downstream role check that trusts the cookie without server-side re-validation grants elevated privileges.&quot;, &quot;title&quot;: &quot;Bypass Authorization to Gain Access&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Supply-Chain / Build Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;build-time&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-10 · CI/CD Pipeline&quot;, &quot;consequence&quot;: &quot;Technical consequence not established.&quot;, &quot;finding_id&quot;: &quot;F-037&quot;, &quot;finding_ids&quot;: [&quot;F-037&quot;], &quot;number&quot;: 2, &quot;prerequisite&quot;: &quot;Build or dependency access required&quot;, &quot;risk&quot;: &quot;Medium&quot;, &quot;route&quot;: &quot;Missing Container Image Signing: Unsigned container images cannot be verified for provenance — any registry intermediary could substitute them.&quot;, &quot;title&quot;: &quot;Bypass or Forge Authentication&quot;, &quot;unproven&quot;: true, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Supply-Chain / Build Attacker&quot;, &quot;actor_note&quot;: &quot;1 role; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;build-time&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data&quot;, &quot;component&quot;: &quot;C-10 · CI/CD Pipeline&quot;, &quot;consequence&quot;: &quot;Technical consequence not established.&quot;, &quot;finding_id&quot;: &quot;F-038&quot;, &quot;finding_ids&quot;: [&quot;F-038&quot;], &quot;number&quot;: 3, &quot;prerequisite&quot;: &quot;Build or dependency access required&quot;, &quot;risk&quot;: &quot;Medium&quot;, &quot;route&quot;: &quot;Default GITHUB_TOKEN Scope Not Restricted: `contents: read` at workflow root forces per-job opt-in for write scopes — minimal privilege by default.&quot;, &quot;title&quot;: &quot;Bypass Authorization to Gain Access&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}], &quot;schema_version&quot;: 2}</metadata><rect width="1330" height="780" fill="#ffffff"/><defs><marker id="f2-attack" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#b3453f"/></marker><marker id="f2-consequence" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs><text x="24" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Threat Actors</text>
+<text x="248" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Attack Route</text>
+<text x="622" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Underlying Weakness</text>
+<text x="966" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Impact (group)</text>
+<g data-route-number="1" data-finding-id="F-001" data-weakness-ids="">
+<title>Anonymous Internet Attacker
+1 role; access details in Identified Actors
+Inject Input into Server Interpreters
+Attacker submits username `&#x27; OR &#x27;1&#x27;=&#x27;1&#x27; --` and any password string to the POST /authentication Level 1 endpoint.
+C-02 · Authentication &amp; Session Surface
+No account required
+No weakness linked in the register
+Authentication bypass via SQL injection: attacker authenticates as any existing user including privileged accounts. Under stated conditions (synthetic test data) no material business harm; technically complete credential bypass is achievable.
+Disclosure of customer information</title>
+<rect x="248" y="42" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="65.0" font-size="13" fill="#1f2937" font-weight="bold" >Inject Input into Server</text>
+<text x="264" y="82.0" font-size="13" fill="#1f2937" font-weight="bold" >Interpreters</text>
+<text x="264" y="99.0" font-size="13" fill="#6b7280" font-weight="normal" >F-001 · no account</text>
+<rect x="622" y="42" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="73.5" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="90.5" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="42" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="82.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 78.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 78.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 78.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="78.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="82.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="1">1</text>
+</g>
+<g data-route-number="2" data-finding-id="F-006" data-weakness-ids="W-001">
+<title>Anonymous Internet Attacker
+1 role; access details in Identified Actors
+Bypass or Forge Authentication
+Attacker scans the target host IP on port 11434 and receives HTTP 200 from GET /api/tags, confirming an unauthenticated Ollama API and obtaining the list of loaded models.
+C-08 · Ollama LLM Runtime
+No account required
+Endpoints are reachable without enforced authentication (W-001)
+Any internet-reachable host can invoke the complete Ollama REST API: enumerate loaded models, perform unrestricted inference, delete or replace models, and exhaust GPU/CPU resources. The embedding model nomic-embed-text is equally exposed, enabling adversarial embedding queries. No LLMForge-level rate limiting, prompt control, or authentication applies to direct API calls.
+Unauthorized administration and changes to protected business data
+Disclosure of customer information</title>
+<rect x="248" y="127" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="158.5" font-size="13" fill="#1f2937" font-weight="bold" >Bypass or Forge Authentication</text>
+<text x="264" y="175.5" font-size="13" fill="#6b7280" font-weight="normal" >F-006 · no account</text>
+<rect x="622" y="127" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="150.0" font-size="13" fill="#334d6e" font-weight="bold" >Endpoints are reachable without</text>
+<text x="638" y="167.0" font-size="13" fill="#334d6e" font-weight="bold" >enforced authentication</text>
+<text x="638" y="184.0" font-size="13" fill="#6b7280" font-weight="normal" >(W-001)</text>
+<rect x="966" y="127" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="150.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="167.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<text x="982" y="184.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 163.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 163.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 163.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="163.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="167.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="2">2</text>
+</g>
+<g data-route-number="3" data-finding-id="F-004" data-weakness-ids="">
+<title>Anonymous Internet Attacker
+1 role; access details in Identified Actors
+Bypass Authorization to Gain Access
+Authenticated low-privilege user discovers the RAG admin endpoint (e.g., /admin/ingest or /documents/delete) through API enumeration.
+C-07 · LLMForge (LLM Adapter Service)
+No account required
+No weakness linked in the register
+Any caller can invoke privileged LLMForge operations (document ingestion, deletion, model management, admin APIs) without holding the required identity or role, allowing horizontal and vertical privilege escalation across the entire LLM service.
+Unauthorized administration and changes to protected business data</title>
+<rect x="248" y="212" width="320" height="56" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="235.0" font-size="13" fill="#1f2937" font-weight="bold" >Bypass Authorization to Gain Access</text>
+<text x="264" y="252.0" font-size="13" fill="#6b7280" font-weight="normal" >F-004 · no account</text>
+<rect x="622" y="212" width="290" height="56" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="235.0" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="252.0" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="212" width="340" height="56" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="235.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="252.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<path d="M194 240.0 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 240.0 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 240.0 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="240.0" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="244.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="3">3</text>
+</g>
+<g data-route-number="4" data-finding-id="F-019" data-weakness-ids="W-004">
+<title>Anonymous Internet Attacker
+1 role; access details in Identified Actors
+Access Exposed Data and Secrets
+The PKCS#12 keystore password `changeIt` is committed as a string literal at JWTAlgorithmKMS.java:41; any actor with read access to the repository can extract the RSA private key from the packaged `sasanlabs.p12` file using this credential, enabling offline JWT forgery for any algorithm that uses the RS256 key.
+C-02 · Authentication &amp; Session Surface
+No account required; Public source available
+Secrets are committed to source instead of a managed store (W-004)
+RSA private key extractable from the packaged keystore using the disclosed password, enabling JWT forgery for RS256-signed tokens. Under stated conditions (demonstration keys, training app) no material business harm; signing keys are not used in production.
+Disclosure of customer information</title>
+<rect x="248" y="280" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="311.5" font-size="13" fill="#1f2937" font-weight="bold" >Access Exposed Data and Secrets</text>
+<text x="264" y="328.5" font-size="13" fill="#6b7280" font-weight="normal" >F-019 · no account · public source</text>
+<rect x="622" y="280" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="303.0" font-size="13" fill="#334d6e" font-weight="bold" >Secrets are committed to source</text>
+<text x="638" y="320.0" font-size="13" fill="#334d6e" font-weight="bold" >instead of a managed store</text>
+<text x="638" y="337.0" font-size="13" fill="#6b7280" font-weight="normal" >(W-004)</text>
+<rect x="966" y="280" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="320.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 316.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 316.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 316.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="316.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="320.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="4">4</text>
+</g>
+<g data-route-number="5" data-finding-id="F-016" data-weakness-ids="">
+<title>Anonymous Internet Attacker
+1 role; access details in Identified Actors
+OS command injection via unsanitized input
+Request data concatenated into a shell/exec argument yields arbitrary command execution.
+C-01 · VulnerableApp Backend (Spring Boot)
+No account required
+No weakness linked in the register
+Technical consequence not established.
+Service disruption or compromise of application data</title>
+<rect x="248" y="365" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="388.0" font-size="13" fill="#1f2937" font-weight="bold" >OS command injection via unsanitized</text>
+<text x="264" y="405.0" font-size="13" fill="#1f2937" font-weight="bold" >input</text>
+<text x="264" y="422.0" font-size="13" fill="#6b7280" font-weight="normal" >F-016 · no account</text>
+<rect x="622" y="365" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="396.5" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="413.5" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="365" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="396.5" font-size="13" fill="#334d6e" font-weight="bold" >Service disruption or compromise of</text>
+<text x="982" y="413.5" font-size="13" fill="#334d6e" font-weight="bold" >application data</text>
+<path d="M194 401.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 401.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 401.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="401.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="405.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="5">5</text>
+</g>
+<g data-route-number="2" data-finding-id="F-008" data-weakness-ids="W-005">
+<title>Authenticated Internet Attacker
+1 role; access details in Identified Actors
+Bypass or Forge Authentication
+Attacker logs in to the Level 2 endpoint and observes the issued session ID, e.g., SESSION-1042.
+C-02 · Authentication &amp; Session Surface
+Regular account required
+Security-sensitive data uses weak cryptographic primitives (W-005)
+Session hijacking: attacker impersonates any recently logged-in Level 2 user. Under stated conditions (synthetic test accounts) no material business harm; technically full impersonation of any concurrent session is achievable.
+Unauthorized administration and changes to protected business data
+Disclosure of customer information</title>
+<rect x="248" y="450" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="481.5" font-size="13" fill="#1f2937" font-weight="bold" >Bypass or Forge Authentication</text>
+<text x="264" y="498.5" font-size="13" fill="#6b7280" font-weight="normal" >F-008 · regular account · unproven</text>
+<rect x="622" y="450" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="473.0" font-size="13" fill="#334d6e" font-weight="bold" >Security-sensitive data uses</text>
+<text x="638" y="490.0" font-size="13" fill="#334d6e" font-weight="bold" >weak cryptographic primitives</text>
+<text x="638" y="507.0" font-size="13" fill="#6b7280" font-weight="normal" >(W-005)</text>
+<rect x="966" y="450" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="473.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="490.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<text x="982" y="507.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 486.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 486.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 486.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="486.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="490.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="2">2</text>
+</g>
+<g data-route-number="3" data-finding-id="F-024" data-weakness-ids="">
+<title>Authenticated Internet Attacker
+1 role; access details in Identified Actors
+Bypass Authorization to Gain Access
+Level 3 login stores the authenticated user&#x27;s role as a plaintext value in the `role_level3` cookie without any integrity protection at IDORLoginController.java:141; an authenticated user replaces the cookie value with `admin` and any downstream role check that trusts the cookie without server-side re-validation grants elevated privileges.
+C-02 · Authentication &amp; Session Surface
+Regular account required
+No weakness linked in the register
+Authenticated attacker elevates their own role to admin by modifying the client-side cookie. Under stated conditions only synthetic roles in a training app are affected; no material business harm. Technically any role claim in the cookie can be tampered to gain administrative privileges.
+Unauthorized administration and changes to protected business data</title>
+<rect x="248" y="535" width="320" height="56" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="558.0" font-size="13" fill="#1f2937" font-weight="bold" >Bypass Authorization to Gain Access</text>
+<text x="264" y="575.0" font-size="13" fill="#6b7280" font-weight="normal" >F-024 · regular account</text>
+<rect x="622" y="535" width="290" height="56" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="558.0" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="575.0" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="535" width="340" height="56" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="558.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="575.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<path d="M194 563.0 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 563.0 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 563.0 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="563.0" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="567.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="3">3</text>
+</g>
+<g data-route-number="2" data-finding-id="F-037" data-weakness-ids="">
+<title>Supply-Chain / Build Attacker
+1 role; access details in Identified Actors
+Bypass or Forge Authentication
+Missing Container Image Signing: Unsigned container images cannot be verified for provenance — any registry intermediary could substitute them.
+C-10 · CI/CD Pipeline
+Build or dependency access required
+No weakness linked in the register
+Technical consequence not established.
+Unauthorized administration and changes to protected business data
+Disclosure of customer information</title>
+<rect x="248" y="603" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="634.5" font-size="13" fill="#1f2937" font-weight="bold" >Bypass or Forge Authentication</text>
+<text x="264" y="651.5" font-size="13" fill="#6b7280" font-weight="normal" >F-037 · build access · unproven</text>
+<rect x="622" y="603" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="634.5" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="651.5" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="603" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="626.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="643.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<text x="982" y="660.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 639.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 639.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 639.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="639.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="643.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="2">2</text>
+</g>
+<g data-route-number="3" data-finding-id="F-038" data-weakness-ids="">
+<title>Supply-Chain / Build Attacker
+1 role; access details in Identified Actors
+Bypass Authorization to Gain Access
+Default GITHUB_TOKEN Scope Not Restricted: `contents: read` at workflow root forces per-job opt-in for write scopes — minimal privilege by default.
+C-10 · CI/CD Pipeline
+Build or dependency access required
+No weakness linked in the register
+Technical consequence not established.
+Unauthorized administration and changes to protected business data</title>
+<rect x="248" y="688" width="320" height="56" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="711.0" font-size="13" fill="#1f2937" font-weight="bold" >Bypass Authorization to Gain Access</text>
+<text x="264" y="728.0" font-size="13" fill="#6b7280" font-weight="normal" >F-038 · build access</text>
+<rect x="622" y="688" width="290" height="56" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="711.0" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="728.0" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="688" width="340" height="56" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="711.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="728.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<path d="M194 716.0 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 716.0 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 716.0 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="716.0" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="720.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="3">3</text>
+</g>
+<g data-actor-card="internet-anon" data-actor-victim="false" data-actor-routes="1 2 3 4 5">
+<rect x="24" y="42" width="170" height="396" rx="7" fill="#fbf6f6" stroke="#a04d4a" stroke-width="1.4" data-column="0"/>
+<text x="40" y="226.5" font-size="13" fill="#b3453f" font-weight="bold" >Anonymous</text>
+<text x="40" y="243.5" font-size="13" fill="#b3453f" font-weight="bold" >Internet</text>
+<text x="40" y="260.5" font-size="13" fill="#b3453f" font-weight="bold" >Attacker</text>
+</g>
+<g data-actor-card="internet-user" data-actor-victim="false" data-actor-routes="2 3">
+<rect x="24" y="450" width="170" height="141" rx="7" fill="#fbf6f6" stroke="#a04d4a" stroke-width="1.4" data-column="0"/>
+<text x="40" y="507.0" font-size="13" fill="#b3453f" font-weight="bold" >Authenticated</text>
+<text x="40" y="524.0" font-size="13" fill="#b3453f" font-weight="bold" >Internet</text>
+<text x="40" y="541.0" font-size="13" fill="#b3453f" font-weight="bold" >Attacker</text>
+</g>
+<g data-actor-card="build-time" data-actor-victim="false" data-actor-routes="2 3">
+<rect x="24" y="603" width="170" height="141" rx="7" fill="#fbf6f6" stroke="#a04d4a" stroke-width="1.4" data-column="0"/>
+<text x="40" y="668.5" font-size="13" fill="#b3453f" font-weight="bold" >Supply-Chain /</text>
+<text x="40" y="685.5" font-size="13" fill="#b3453f" font-weight="bold" >Build Attacker</text>
+</g></svg>

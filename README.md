@@ -25,8 +25,8 @@ of files that share a common slug `threat-model-<target>-<depth>-v<version>`:
 
 Optional outputs are linked for each run below when they were generated.
 
-The `-v<version>` suffix names the plugin release a run belongs to (`b3` =
-beta 3), so outputs from different releases stay side by side and comparable.
+The `-v<version>` suffix names the plugin release a run belongs to (`b4` =
+beta 4), so outputs from different releases stay side by side and comparable.
 Each YAML file records the exact plugin version, models and invocation in its
 `meta` block.
 
@@ -36,55 +36,30 @@ Each YAML file records the exact plugin version, models and invocation in its
 insecure web shop, v20.1.1 in all runs:
 
 - **Tech stack:** Angular, Node.js, Express, Socket.IO, Sequelize, SQLite, Docker.
-- **[Quick](threat-modeler/threat-model-juice-shop-quick-v0.5.2.md)** — Model:
-  Claude Sonnet 4.6 · 🔴 7 Critical · 🟠 15 High · 🟡 12 Medium · 🟢 0 Low ·
-  34 total. Artifacts: [YAML](threat-modeler/threat-model-juice-shop-quick-v0.5.2.yaml).
-- **[Standard](threat-modeler/threat-model-juice-shop-standard-v0.6.0b3.md)** —
-  Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 · 🔴 8 Critical ·
-  🟠 22 High · 🟡 19 Medium · 49 total, reporting threshold medium.
-  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-standard-v0.6.0b3.yaml).
-- **[Thorough](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b3.md)** —
-  Model: Claude Opus · 🔴 11 Critical · 🟠 20 High · 🟡 22 Medium · 53 total,
-  reporting threshold medium.
-  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b3.yaml) ·
-  [HTML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b3.html) ·
-  [PDF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b3.pdf) ·
-  [SARIF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b3.sarif.json) ·
-  [Threat Dragon](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b3.threatdragon.json).
-- **[Standard with requirements](threat-modeler/threat-model-juice-shop-standard-req-v0.6.0b2.md)** —
-  standard run on 0.6.0-beta.2 invoked with `--requirements` against the bundled
-  [example baseline](https://github.com/appsec-foundry/appsec-advisor/blob/main/examples/appsec-requirements-example.yaml),
-  which carries 73 requirements in 11 categories plus 12 blueprint guidance
-  entries. Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 ·
-  🔴 10 Critical · 🟠 27 High · 🟡 15 Medium · 52 total, reporting threshold
-  medium. The run adds section 7b with a per-requirement verdict: 2 PASS ·
-  40 FAIL · 10 PARTIAL · 5 N/A · 16 UNVERIFIABLE, and a traceability table
-  linking each violated requirement to its findings and mitigations.
-  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-standard-req-v0.6.0b2.yaml).
-- **[Pentest tasks](threat-modeler/pentest-tasks-juice-shop-thorough-v0.6.0b2.yaml)** —
+- **[Standard](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.md)** —
+  Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 · 🔴 6 Critical ·
+  🟠 42 High · 🟡 23 Medium · 71 total, reporting threshold medium.
+  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.yaml).
+- **[Thorough](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.md)** —
+  Model: Claude Opus · 🔴 6 Critical · 🟠 24 High · 🟡 36 Medium · 66 total.
+  Artifacts: [YAML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.yaml) ·
+  [HTML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.html) ·
+  [PDF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.pdf) ·
+  [SARIF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.sarif.json) ·
+  [Threat Dragon](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.threatdragon.json).
+- **[Pentest tasks](threat-modeler/pentest-tasks-juice-shop-thorough-v0.6.0b4.yaml)** —
   endpoint catalog and pentest plan in the Strix dialect for
-  `http://localhost:3000`, exported from the thorough 0.6.0-beta.2 run. The
-  report of that run is in the plugin repository:
-  [thorough v0.6.0b2](https://github.com/appsec-foundry/appsec-advisor/blob/dev/examples/threat-modeler/threat-model-juice-shop-thorough-v0.6.0b2.md).
-
-**[Insecure Spring App](https://github.com/matthiasrohr/insecure-spring-app)** —
-local-only application-security verification fixture:
-
-- **Tech stack:** Java 17, Spring Boot, Spring Security, JPA, Thymeleaf, H2,
-  Docker.
-- **[Standard](threat-modeler/threat-model-insecure-webapp-standard-v0.5.2.md)** —
-  Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 ·
-  🔴 10 Critical · 🟠 29 High · 🟡 4 Medium · 🟢 0 Low · 43 total.
-  Artifacts: [YAML](threat-modeler/threat-model-insecure-webapp-standard-v0.5.2.yaml).
+  `http://localhost:3000`, exported from the
+  [thorough run](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.md).
 
 **[OWASP VulnerableApp](https://github.com/SasanLabs/VulnerableApp)** —
 vulnerable application for demonstrating and testing security issues:
 
 - **Tech stack:** Java, Spring Boot, JSP, PHP.
-- **[Standard](threat-modeler/threat-model-owasp-vulnerableapp-standard-v0.5.2.md)** —
+- **[Standard](threat-modeler/threat-model-owasp-vulnerableapp-v0.6.0b4.md)** —
   Model: Claude Sonnet 4.6, triage and merge on Claude Sonnet 5 ·
-  🔴 6 Critical · 🟠 31 High · 🟡 23 Medium · 🟢 0 Low · 60 total.
-  Artifacts: [YAML](threat-modeler/threat-model-owasp-vulnerableapp-standard-v0.5.2.yaml).
+  🔴 4 Critical · 🟠 23 High · 🟡 21 Medium · 48 total, reporting threshold medium.
+  Artifacts: [YAML](threat-modeler/threat-model-owasp-vulnerableapp-v0.6.0b4.yaml).
 
 ## Assessment depths
 
@@ -108,16 +83,16 @@ handles applications with a large number of components.
 
 The repository defines 42 Docker Compose services across 7 network zones. The
 standard run (Claude Sonnet 4.6, triage and merge on Claude Sonnet 5)
-represents the system as 15 logical components, identifies 123 entry points and
-performs full STRIDE analysis on 8 components. The other 7 get a
-reduced-budget screening pass across all six STRIDE categories without
-verification greps. 🔴 19 Critical · 🟠 21 High · 🟡 11 Medium · 51 total,
+represents the system as 21 logical components, identifies 124 entry points and
+performs full STRIDE analysis on 14 components. The other 7 are listed under
+"Components Not Individually Analyzed" because they are out of scope at
+standard depth. 🔴 13 Critical · 🟠 40 High · 🟡 16 Medium · 69 total,
 reporting threshold medium.
 
-Artifacts: [report](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b3.md) ·
-[YAML](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b3.yaml) ·
-[figure 1: architecture](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b3.figure1.svg) ·
-[figure 2: risk flow](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b3.figure2.svg).
+Artifacts: [report](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.md) ·
+[YAML](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.yaml) ·
+[figure 1: architecture](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.figure1.svg) ·
+[figure 2: risk flow](threat-modeler/threat-model-insecure-large-spring-app-v0.6.0b4.figure2.svg).
 
 ## Run it yourself
 

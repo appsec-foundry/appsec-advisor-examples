@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1330" height="593" viewBox="0 0 1330 593" font-family="Helvetica, Arial, sans-serif" data-figure2-version="2" data-glyphs="1 2 3 4 5 5" role="img" aria-labelledby="f2-title"><title id="f2-title">Actors, attack routes, underlying weaknesses and impact</title><metadata id="figure2-data">{&quot;routes&quot;: [{&quot;actor&quot;: &quot;Internet Attacker&quot;, &quot;actor_note&quot;: &quot;2 roles; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-01 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;Attacker bypasses authentication on the legacy SQLite path, dumps all user credentials, modifies user roles, or destroys user data by executing arbitrary SQL against the legacy authentication database.&quot;, &quot;finding_id&quot;: &quot;F-011&quot;, &quot;finding_ids&quot;: [&quot;F-011&quot;, &quot;F-025&quot;], &quot;number&quot;: 1, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;Critical&quot;, &quot;route&quot;: &quot;Attacker sends GET /api/legacy-sqlite/login-raw?username=x&amp;password=%27+OR+role%3D%27ADMIN%27+--+- to the unauthenticated endpoint.&quot;, &quot;title&quot;: &quot;SQL and OS command injection via auth and service paths&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Internet Attacker&quot;, &quot;actor_note&quot;: &quot;2 roles; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data\nCustomer account misuse and disclosure of private account data&quot;, &quot;component&quot;: &quot;C-01 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;Any unauthenticated attacker gains a valid session token for any application user, including administrators, by supplying the target userId — bypassing all credential requirements on the homegrown session path.&quot;, &quot;finding_id&quot;: &quot;F-015&quot;, &quot;finding_ids&quot;: [&quot;F-001&quot;, &quot;F-003&quot;, &quot;F-007&quot;, &quot;F-015&quot;, &quot;F-020&quot;, &quot;F-021&quot;, &quot;F-023&quot;, &quot;F-026&quot;, &quot;F-027&quot;, &quot;F-028&quot;, &quot;F-032&quot;, &quot;F-038&quot;, &quot;F-039&quot;, &quot;F-045&quot;, &quot;F-046&quot;], &quot;number&quot;: 2, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;Critical&quot;, &quot;route&quot;: &quot;Attacker discovers GET /api/auth/homegrown-token is accessible without authentication by browsing /api/auth/ endpoints, which are all permitAll per SecurityConfig.&quot;, &quot;title&quot;: &quot;Bypass or Forge Authentication&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;Endpoints are reachable without enforced authentication (W-001)&quot;, &quot;weakness_ids&quot;: [&quot;W-001&quot;]}, {&quot;actor&quot;: &quot;Internet Attacker&quot;, &quot;actor_note&quot;: &quot;2 roles; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Unauthorized administration and changes to protected business data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-08 · Legacy Admin Board&quot;, &quot;consequence&quot;: &quot;Any anonymous internet caller can invoke all three admin endpoints — user listing, account promotion, and account deletion — without presenting any credential, gaining full administrative capability over the application&#x27;s user base.&quot;, &quot;finding_id&quot;: &quot;F-009&quot;, &quot;finding_ids&quot;: [&quot;F-005&quot;, &quot;F-009&quot;, &quot;F-012&quot;, &quot;F-013&quot;, &quot;F-014&quot;, &quot;F-016&quot;, &quot;F-017&quot;, &quot;F-018&quot;, &quot;F-019&quot;, &quot;F-022&quot;, &quot;F-033&quot;, &quot;F-037&quot;, &quot;F-050&quot;, &quot;F-051&quot;, &quot;F-052&quot;, &quot;F-053&quot;, &quot;F-054&quot;], &quot;number&quot;: 3, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;Critical&quot;, &quot;route&quot;: &quot;Attacker discovers /legacy/admin via URL enumeration or public source review.&quot;, &quot;title&quot;: &quot;Bypass Authorization to Gain Access&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;Endpoints are reachable without enforced authentication (W-001)&quot;, &quot;weakness_ids&quot;: [&quot;W-001&quot;]}, {&quot;actor&quot;: &quot;Internet Attacker&quot;, &quot;actor_note&quot;: &quot;2 roles; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Disclosure of customer information&quot;, &quot;component&quot;: &quot;C-02 · Web UI / Backend-for-Frontend&quot;, &quot;consequence&quot;: &quot;An authenticated attacker can overwrite any file writable by the application process, including system cron files, application JARs, or configuration files, enabling persistent code execution or service disruption.&quot;, &quot;finding_id&quot;: &quot;F-030&quot;, &quot;finding_ids&quot;: [&quot;F-030&quot;, &quot;F-034&quot;, &quot;F-035&quot;, &quot;F-036&quot;, &quot;F-040&quot;, &quot;F-041&quot;, &quot;F-042&quot;, &quot;F-043&quot;, &quot;F-044&quot;, &quot;F-063&quot;], &quot;number&quot;: 4, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;High&quot;, &quot;route&quot;: &quot;An authenticated user submits a document upload with filename set to `../../etc/cron.d/backdoor`; BusinessFileStorage.java:17 takes the raw value from MultipartFile.getOriginalFilename() and BusinessFileStorage.java:23 resolves it against the base directory without normalization, writing the attacker&#x27;s content to an arbitrary server path.&quot;, &quot;title&quot;: &quot;Access Exposed Data and Secrets&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;Input handling lacks enforced boundary validation (W-003)&quot;, &quot;weakness_ids&quot;: [&quot;W-003&quot;]}, {&quot;actor&quot;: &quot;Internet Attacker&quot;, &quot;actor_note&quot;: &quot;2 roles; access details in Identified Actors&quot;, &quot;actor_slug&quot;: &quot;internet-anon&quot;, &quot;business_harm&quot;: &quot;Service disruption or compromise of application data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-01 · Authentication &amp; Session Surface&quot;, &quot;consequence&quot;: &quot;Technical consequence not established.&quot;, &quot;finding_id&quot;: &quot;F-065&quot;, &quot;finding_ids&quot;: [&quot;F-064&quot;, &quot;F-065&quot;], &quot;number&quot;: 5, &quot;prerequisite&quot;: &quot;No account required&quot;, &quot;risk&quot;: &quot;Medium&quot;, &quot;route&quot;: &quot;Missing npm Lockfile: Without a lockfile, `npm install` installs different transitive versions on each run — supply-chain attacks become undetectable.&quot;, &quot;title&quot;: &quot;Compromise the Build or Its Inputs&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}, {&quot;actor&quot;: &quot;Supply-Chain / Build Attacker&quot;, &quot;actor_note&quot;: &quot;compromises a dependency or build pipeline, or contributes malicious code to a public repo&quot;, &quot;actor_slug&quot;: &quot;build-time&quot;, &quot;business_harm&quot;: &quot;Service disruption or compromise of application data\nDisclosure of customer information&quot;, &quot;component&quot;: &quot;C-18 · Elasticsearch Index&quot;, &quot;consequence&quot;: &quot;A substituted Elasticsearch image runs arbitrary code inside the data zone with network access to all co-located services, enabling credential harvesting, data exfiltration, or lateral movement.&quot;, &quot;finding_id&quot;: &quot;F-057&quot;, &quot;finding_ids&quot;: [&quot;F-057&quot;, &quot;F-058&quot;, &quot;F-059&quot;, &quot;F-060&quot;], &quot;number&quot;: 5, &quot;prerequisite&quot;: &quot;Build or dependency access required&quot;, &quot;risk&quot;: &quot;Medium&quot;, &quot;route&quot;: &quot;At the next docker-compose pull or a registry-side tag replacement, a compromised Docker Hub account or a DNS/MITM attack against the registry allows a malicious image to replace elasticsearch:8.13.0; the deployment has no digest pin to detect the substitution, so the container starts the trojaned image with full access to the data network.&quot;, &quot;title&quot;: &quot;Compromise the Build or Its Inputs&quot;, &quot;unproven&quot;: false, &quot;victim&quot;: false, &quot;weakness&quot;: &quot;No weakness linked in the register&quot;, &quot;weakness_ids&quot;: []}], &quot;schema_version&quot;: 2}</metadata><rect width="1330" height="593" fill="#ffffff"/><defs><marker id="f2-attack" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#b3453f"/></marker><marker id="f2-consequence" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs><text x="24" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Threat Actors</text>
+<text x="248" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Attack Route</text>
+<text x="622" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Underlying Weakness</text>
+<text x="966" y="22" font-size="13" fill="#334d6e" font-weight="bold" >Impact (group)</text>
+<g data-route-number="1" data-finding-id="F-011" data-weakness-ids="">
+<title>Internet Attacker
+2 roles; access details in Identified Actors
+SQL and OS command injection via auth and service paths
+Attacker sends GET /api/legacy-sqlite/login-raw?username=x&amp;password=%27+OR+role%3D%27ADMIN%27+--+- to the unauthenticated endpoint.
+C-01 · Authentication &amp; Session Surface
+No account required
+No weakness linked in the register
+Attacker bypasses authentication on the legacy SQLite path, dumps all user credentials, modifies user roles, or destroys user data by executing arbitrary SQL against the legacy authentication database.
+Unauthorized administration and changes to protected business data
+Disclosure of customer information</title>
+<rect x="248" y="42" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="65.0" font-size="13" fill="#1f2937" font-weight="bold" >SQL and OS command injection via</text>
+<text x="264" y="82.0" font-size="13" fill="#1f2937" font-weight="bold" >auth and service paths</text>
+<text x="264" y="99.0" font-size="13" fill="#6b7280" font-weight="normal" >F-011 · no account</text>
+<rect x="622" y="42" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="73.5" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="90.5" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="42" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="65.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="82.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<text x="982" y="99.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 78.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 78.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 78.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="78.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="82.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="1">1</text>
+</g>
+<g data-route-number="2" data-finding-id="F-015" data-weakness-ids="W-001">
+<title>Internet Attacker
+2 roles; access details in Identified Actors
+Bypass or Forge Authentication
+Attacker discovers GET /api/auth/homegrown-token is accessible without authentication by browsing /api/auth/ endpoints, which are all permitAll per SecurityConfig.
+C-01 · Authentication &amp; Session Surface
+No account required
+Endpoints are reachable without enforced authentication (W-001)
+Any unauthenticated attacker gains a valid session token for any application user, including administrators, by supplying the target userId — bypassing all credential requirements on the homegrown session path.
+Unauthorized administration and changes to protected business data
+Customer account misuse and disclosure of private account data</title>
+<rect x="248" y="127" width="320" height="90" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="167.0" font-size="13" fill="#1f2937" font-weight="bold" >Bypass or Forge Authentication</text>
+<text x="264" y="184.0" font-size="13" fill="#6b7280" font-weight="normal" >F-015 · no account</text>
+<rect x="622" y="127" width="290" height="90" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="158.5" font-size="13" fill="#334d6e" font-weight="bold" >Endpoints are reachable without</text>
+<text x="638" y="175.5" font-size="13" fill="#334d6e" font-weight="bold" >enforced authentication</text>
+<text x="638" y="192.5" font-size="13" fill="#6b7280" font-weight="normal" >(W-001)</text>
+<rect x="966" y="127" width="340" height="90" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="150.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="167.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<text x="982" y="184.0" font-size="13" fill="#334d6e" font-weight="bold" >Customer account misuse and</text>
+<text x="982" y="201.0" font-size="13" fill="#334d6e" font-weight="bold" >disclosure of private account data</text>
+<path d="M194 172.0 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 172.0 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 172.0 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="172.0" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="176.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="2">2</text>
+</g>
+<g data-route-number="3" data-finding-id="F-009" data-weakness-ids="W-001">
+<title>Internet Attacker
+2 roles; access details in Identified Actors
+Bypass Authorization to Gain Access
+Attacker discovers /legacy/admin via URL enumeration or public source review.
+C-08 · Legacy Admin Board
+No account required
+Endpoints are reachable without enforced authentication (W-001)
+Any anonymous internet caller can invoke all three admin endpoints — user listing, account promotion, and account deletion — without presenting any credential, gaining full administrative capability over the application&#x27;s user base.
+Unauthorized administration and changes to protected business data
+Disclosure of customer information</title>
+<rect x="248" y="229" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="260.5" font-size="13" fill="#1f2937" font-weight="bold" >Bypass Authorization to Gain Access</text>
+<text x="264" y="277.5" font-size="13" fill="#6b7280" font-weight="normal" >F-009 · no account</text>
+<rect x="622" y="229" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="252.0" font-size="13" fill="#334d6e" font-weight="bold" >Endpoints are reachable without</text>
+<text x="638" y="269.0" font-size="13" fill="#334d6e" font-weight="bold" >enforced authentication</text>
+<text x="638" y="286.0" font-size="13" fill="#6b7280" font-weight="normal" >(W-001)</text>
+<rect x="966" y="229" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="252.0" font-size="13" fill="#334d6e" font-weight="bold" >Unauthorized administration and</text>
+<text x="982" y="269.0" font-size="13" fill="#334d6e" font-weight="bold" >changes to protected business data</text>
+<text x="982" y="286.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 265.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 265.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 265.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="265.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="269.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="3">3</text>
+</g>
+<g data-route-number="4" data-finding-id="F-030" data-weakness-ids="W-003">
+<title>Internet Attacker
+2 roles; access details in Identified Actors
+Access Exposed Data and Secrets
+An authenticated user submits a document upload with filename set to `../../etc/cron.d/backdoor`; BusinessFileStorage.java:17 takes the raw value from MultipartFile.getOriginalFilename() and BusinessFileStorage.java:23 resolves it against the base directory without normalization, writing the attacker&#x27;s content to an arbitrary server path.
+C-02 · Web UI / Backend-for-Frontend
+No account required
+Input handling lacks enforced boundary validation (W-003)
+An authenticated attacker can overwrite any file writable by the application process, including system cron files, application JARs, or configuration files, enabling persistent code execution or service disruption.
+Disclosure of customer information</title>
+<rect x="248" y="314" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="345.5" font-size="13" fill="#1f2937" font-weight="bold" >Access Exposed Data and Secrets</text>
+<text x="264" y="362.5" font-size="13" fill="#6b7280" font-weight="normal" >F-030 · no account</text>
+<rect x="622" y="314" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="337.0" font-size="13" fill="#334d6e" font-weight="bold" >Input handling lacks enforced</text>
+<text x="638" y="354.0" font-size="13" fill="#334d6e" font-weight="bold" >boundary validation</text>
+<text x="638" y="371.0" font-size="13" fill="#6b7280" font-weight="normal" >(W-003)</text>
+<rect x="966" y="314" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="354.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 350.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 350.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 350.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="350.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="354.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="4">4</text>
+</g>
+<g data-route-number="5" data-finding-id="F-065" data-weakness-ids="">
+<title>Internet Attacker
+2 roles; access details in Identified Actors
+Compromise the Build or Its Inputs
+Missing npm Lockfile: Without a lockfile, `npm install` installs different transitive versions on each run — supply-chain attacks become undetectable.
+C-01 · Authentication &amp; Session Surface
+No account required
+No weakness linked in the register
+Technical consequence not established.
+Service disruption or compromise of application data
+Disclosure of customer information</title>
+<rect x="248" y="399" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="430.5" font-size="13" fill="#1f2937" font-weight="bold" >Compromise the Build or Its Inputs</text>
+<text x="264" y="447.5" font-size="13" fill="#6b7280" font-weight="normal" >F-065 · no account</text>
+<rect x="622" y="399" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="430.5" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="447.5" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="399" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="422.0" font-size="13" fill="#334d6e" font-weight="bold" >Service disruption or compromise of</text>
+<text x="982" y="439.0" font-size="13" fill="#334d6e" font-weight="bold" >application data</text>
+<text x="982" y="456.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 435.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 435.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 435.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="435.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="439.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="5">5</text>
+</g>
+<g data-route-number="5" data-finding-id="F-057" data-weakness-ids="">
+<title>Supply-Chain / Build Attacker
+compromises a dependency or build pipeline, or contributes malicious code to a public repo
+Compromise the Build or Its Inputs
+At the next docker-compose pull or a registry-side tag replacement, a compromised Docker Hub account or a DNS/MITM attack against the registry allows a malicious image to replace elasticsearch:8.13.0; the deployment has no digest pin to detect the substitution, so the container starts the trojaned image with full access to the data network.
+C-18 · Elasticsearch Index
+Build or dependency access required
+No weakness linked in the register
+A substituted Elasticsearch image runs arbitrary code inside the data zone with network access to all co-located services, enabling credential harvesting, data exfiltration, or lateral movement.
+Service disruption or compromise of application data
+Disclosure of customer information</title>
+<rect x="248" y="484" width="320" height="73" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.4" data-column="1"/>
+<text x="264" y="515.5" font-size="13" fill="#1f2937" font-weight="bold" >Compromise the Build or Its Inputs</text>
+<text x="264" y="532.5" font-size="13" fill="#6b7280" font-weight="normal" >F-057 · build access</text>
+<rect x="622" y="484" width="290" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="2"/>
+<text x="638" y="515.5" font-size="13" fill="#6b7280" font-weight="normal" >No weakness linked in the</text>
+<text x="638" y="532.5" font-size="13" fill="#6b7280" font-weight="normal" >register</text>
+<rect x="966" y="484" width="340" height="73" rx="7" fill="#f3f6fa" stroke="#4f6d9c" stroke-width="1.4" data-column="3"/>
+<text x="982" y="507.0" font-size="13" fill="#334d6e" font-weight="bold" >Service disruption or compromise of</text>
+<text x="982" y="524.0" font-size="13" fill="#334d6e" font-weight="bold" >application data</text>
+<text x="982" y="541.0" font-size="13" fill="#334d6e" font-weight="bold" >Disclosure of customer information</text>
+<path d="M194 520.5 H246" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M568 520.5 H620" fill="none" stroke="#b3453f" stroke-width="1.8" marker-end="url(#f2-attack)"/>
+<path d="M912 520.5 H964" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#f2-consequence)" stroke-dasharray="5 4"/>
+<circle cx="221.0" cy="520.5" r="10" fill="#b3453f" stroke="#ffffff" stroke-width="1.5"/>
+<text x="221.0" y="524.5" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" data-badge-number="5">5</text>
+</g>
+<g data-actor-card="internet-anon" data-actor-victim="false" data-actor-routes="1 2 3 4 5">
+<rect x="24" y="42" width="170" height="430" rx="7" fill="#fbf6f6" stroke="#a04d4a" stroke-width="1.4" data-column="0"/>
+<text x="40" y="252.0" font-size="13" fill="#b3453f" font-weight="bold" >Internet</text>
+<text x="40" y="269.0" font-size="13" fill="#b3453f" font-weight="bold" >Attacker</text>
+</g>
+<g data-actor-card="build-time" data-actor-victim="false" data-actor-routes="5">
+<rect x="24" y="484" width="170" height="73" rx="7" fill="#fbf6f6" stroke="#a04d4a" stroke-width="1.4" data-column="0"/>
+<text x="40" y="515.5" font-size="13" fill="#b3453f" font-weight="bold" >Supply-Chain /</text>
+<text x="40" y="532.5" font-size="13" fill="#b3453f" font-weight="bold" >Build Attacker</text>
+</g></svg>

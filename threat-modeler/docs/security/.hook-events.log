@@ -1,0 +1,53 @@
+2026-10-02T06:43:48Z  [e4b6a07e]  INFO   BASH_OK             cmd=ls -A && echo --- && git ls-files . && git rev-parse --show-toplevel  dur=2s
+2026-10-02T06:43:57Z  [e4b6a07e]  INFO   BASH_OK             cmd=ls -la .bashrc .gitconfig .mcp.json docs .claude | head -30; git status --short …  dur=3s
+2026-10-02T06:44:04Z  [e4b6a07e]  INFO   BASH_OK             cmd=find docs -ls  dur=3s
+2026-10-02T06:44:21Z  [e4b6a07e]  INFO   BASH_OK             cmd=git ls-files . | grep -v '^README.md$' | xargs git rm -q && rm -f threat-model-*…  dur=4s
+2026-10-02T06:44:31Z  [e4b6a07e]  INFO   BASH_OK             cmd=git commit -q -m "Remove generated threat model example files" && git log --onel…  dur=6s
+2026-10-02T06:44:40Z  [e4b6a07e]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-02T06:44:40Z  [e4b6a07e]  INFO   SESSION_STOP        stop_reason=tool_use  in=22  out=2,732  cache_write=82,202  cache_read=622,090  cost=$0.5359
+2026-10-02T06:44:40Z  [e4b6a07e]  INFO   ASSESSMENT_SUMMARY  mode=full  duration=0m 52s  plugin_version=0.6.0-beta.3  analysis_version=5  threats=0 (Critical=0, High=0, Medium=0, Low=0)
+2026-10-02T06:44:40Z  [e4b6a07e]  INFO   ASSESSMENT_TOKENS   throughput=707,046  input=704,314  output=2,732  (input split: fresh=22 cache_write=82,202 cache_read=622,090)  cost=$0.5359  billing=subscription
+2026-10-02T06:44:40Z  [e4b6a07e]  INFO   ASSESSMENT_MODELS   agents: none detected
+2026-10-02T06:44:42Z  [e4b6a07e]  INFO   SESSION_STOP        stop_reason=unknown  in=0  out=0  cost=n/a (no usage data in transcript or payload)
+2026-10-02T06:46:24Z  [e4b6a07e]  INFO   BASH_OK             cmd=cd /home/mrohr/appsec-advisor-examples && git status --short && git log --onelin…  dur=2s
+2026-10-02T06:46:28Z  [e4b6a07e]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-02T06:46:28Z  [e4b6a07e]  INFO   SESSION_STOP        stop_reason=end_turn  in=32  out=4,440  cache_write=83,140  cache_read=960,863  cost=$0.6667
+2026-10-02T06:46:31Z  [e4b6a07e]  INFO   SESSION_STOP        stop_reason=unknown  in=0  out=0  cost=n/a (no usage data in transcript or payload)
+2026-10-05T20:02:58Z  [4dde32a8]  INFO   BASH_OK             cmd=ls; git ls-files | grep -i readme; grep -n -i -E "0\.[0-9]+\.[0-9]+|threat-model…  dur=1s
+2026-10-05T20:02:59Z  [4dde32a8]  INFO   FILE_READ           /home/mrohr/appsec-advisor-examples/threat-modeler/README.md  dur=0s
+2026-10-05T20:03:02Z  [4dde32a8]  INFO   BASH_OK             cmd=cd /home/mrohr/appsec-advisor-examples && grep -n -i -E "v0\.|threat-model-|dept…  dur=0s
+2026-10-05T20:03:04Z  [4dde32a8]  INFO   FILE_READ           /home/mrohr/appsec-advisor-examples/README.md  dur=0s
+2026-10-05T20:03:12Z  [4dde32a8]  INFO   BASH_OK             cmd=for f in threat-model-*-v0.6.0b4.yaml; do echo "== $f"; python3 - "$f" <<'E' imp…  dur=4s
+2026-10-05T20:03:19Z  [4dde32a8]  INFO   BASH_OK             cmd=for f in threat-model-*-v0.6.0b4.yaml; do echo "== $f"; python3 - "$f" <<'E' imp…  dur=4s
+2026-10-05T20:03:32Z  [4dde32a8]  WARN   BASH_WARN           cmd=cd /home/mrohr/appsec-advisor-examples && python3 - <<'E' import re p='README.md…  resp=127:- Which operations in Legacy Admin Board or Authentication & Session Surface and other components are intended to be available without login? ([W-001](#w-001): [F-009](#f-009), [F-015](#f-015), [F-016](#f-016) +5 more)  dur=1s
+2026-10-05T20:03:37Z  [4dde32a8]  INFO   BASH_OK             cmd=python3 - <<'E' import yaml d=yaml.safe_load(open('threat-model-insecure-large-s…  dur=2s
+2026-10-05T20:03:40Z  [4dde32a8]  INFO   BASH_OK             cmd=sed -n 5796,5812p threat-model-insecure-large-spring-app-v0.6.0b4.md | cut -c1-3…  dur=1s
+2026-10-05T20:03:48Z  [4dde32a8]  INFO   BASH_OK             cmd=cd /home/mrohr/appsec-advisor-examples && python3 - <<'E' import re s=open('READ…  dur=1s
+2026-10-05T20:03:51Z  [4dde32a8]  INFO   FILE_READ           /home/mrohr/appsec-advisor-examples/threat-modeler/.tmp_readme  dur=0s
+2026-10-05T20:04:04Z  [4dde32a8]  INFO   FILE_WRITE          /home/mrohr/appsec-advisor-examples/README.md  (5,777 chars)  dur=1s
+2026-10-05T20:04:05Z  [4dde32a8]  INFO   BASH_OK             cmd=rm /home/mrohr/appsec-advisor-examples/threat-modeler/.tmp_readme; cd /home/mroh…  dur=1s
+2026-10-05T20:04:11Z  [4dde32a8]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-05T20:04:11Z  [4dde32a8]  INFO   SESSION_STOP        stop_reason=end_turn  in=50  out=20,791  cache_write=121,374  cache_read=1,682,736  cost=$1.2720
+2026-10-05T20:04:19Z  [4dde32a8]  INFO   BASH_OK             cmd=cd /home/mrohr/appsec-advisor-examples && git status --short | grep -v "^A  thre…  dur=1s
+2026-10-05T20:04:26Z  [4dde32a8]  INFO   BASH_OK             cmd=cd /home/mrohr/appsec-advisor-examples && git rm -r -q --cached -f threat-modele…  dur=0s
+2026-10-05T20:04:30Z  [4dde32a8]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-05T20:04:30Z  [4dde32a8]  INFO   SESSION_STOP        stop_reason=end_turn  in=64  out=23,012  cache_write=125,841  cache_read=2,293,783  cost=$1.5054
+2026-10-05T20:06:09Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=+372 chars  dur=0s
+2026-10-05T20:06:10Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=-64 chars  dur=0s
+2026-10-05T20:06:11Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=-21 chars  dur=0s
+2026-10-05T20:06:12Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=-66 chars  dur=0s
+2026-10-05T20:06:13Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=-57 chars  dur=1s
+2026-10-05T20:06:18Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=+75 chars  dur=0s
+2026-10-05T20:06:22Z  [4dde32a8]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-05T20:06:22Z  [4dde32a8]  INFO   SESSION_STOP        stop_reason=end_turn  in=82  out=32,404  cache_write=144,369  cache_read=3,101,758  cost=$1.9582
+2026-10-05T20:06:33Z  [4dde32a8]  INFO   FILE_READ           /home/mrohr/appsec-advisor-examples/README.md  range=offset=26,limit=100  dur=0s
+2026-10-05T20:06:37Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=-189 chars  dur=1s
+2026-10-05T20:06:38Z  [4dde32a8]  INFO   FILE_EDIT           /home/mrohr/appsec-advisor-examples/README.md  delta=-38 chars  dur=0s
+2026-10-05T20:06:42Z  [4dde32a8]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-05T20:06:42Z  [4dde32a8]  INFO   SESSION_STOP        stop_reason=end_turn  in=94  out=35,911  cache_write=154,058  cache_read=3,668,420  cost=$2.2172
+2026-10-05T20:07:03Z  [4dde32a8]  INFO   FILE_WRITE          /home/mrohr/appsec-advisor-examples/README.md  (5,192 chars)  dur=0s
+2026-10-05T20:07:06Z  [4dde32a8]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-05T20:07:06Z  [4dde32a8]  INFO   SESSION_STOP        stop_reason=end_turn  in=100  out=40,950  cache_write=157,357  cache_read=3,962,064  cost=$2.3933
+2026-10-05T20:07:12Z  [4dde32a8]  INFO   BASH_OK             cmd=cd /home/mrohr/appsec-advisor-examples && git add README.md && git commit -q -m …  dur=0s
+2026-10-05T20:07:14Z  [4dde32a8]  WARN   AGENT_USAGE_UNATTRIBUTED  reason=no_agent_call_identity
+2026-10-05T20:07:14Z  [4dde32a8]  INFO   SESSION_STOP        stop_reason=end_turn  in=104  out=41,176  cache_write=157,941  cache_read=4,163,628  cost=$2.4593

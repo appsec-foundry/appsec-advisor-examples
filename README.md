@@ -44,13 +44,13 @@ Express, Socket.IO, Sequelize, SQLite, Docker.
 - [Standard run](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.md):
   6 critical, 42 high, 23 medium, 71 findings in total. Also available as
   [YAML](threat-modeler/threat-model-juice-shop-standard-v0.6.0b4.yaml).
-- [Thorough run](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.md):
-  6 critical, 24 high, 36 medium, 66 findings in total. Also available as
-  [YAML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.yaml),
-  [HTML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.html),
-  [PDF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.pdf),
-  [SARIF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.sarif.json)
-  and [Threat Dragon](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b4.threatdragon.json).
+- [Thorough run](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b5.md):
+  6 critical, 21 high, 32 medium, 59 findings in total. Also available as
+  [YAML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b5.yaml),
+  [HTML](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b5.html),
+  [PDF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b5.pdf),
+  [SARIF](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b5.sarif.json)
+  and [Threat Dragon](threat-modeler/threat-model-juice-shop-thorough-v0.6.0b5.threatdragon.json).
 - [Pentest tasks](threat-modeler/pentest-tasks-juice-shop-thorough-v0.6.0b4.yaml):
   endpoint catalog and pentest plan in the Strix dialect for
   `http://localhost:3000`, exported from the thorough run.

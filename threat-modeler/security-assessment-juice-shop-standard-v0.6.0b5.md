@@ -148,7 +148,7 @@ The code cannot answer these questions; the people who own the business and the 
 
 At runtime, Juice Shop has 8 components in 3 layers and exchanges data with 4 external services. Figure 1a shows these data flows and where each of the 7 attack scenarios below begins. The complete boundary catalogue remains in [§1 Trust Boundaries](#trust-boundaries).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="security-assessment-juice-shop-thorough-v0.6.0b5.figure1-dark.svg"><img src="security-assessment-juice-shop-thorough-v0.6.0b5.figure1.svg" alt="Figure 1a - Runtime Architecture and Threat Overview"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="security-assessment-juice-shop-standard-v0.6.0b5.figure1-dark.svg"><img src="security-assessment-juice-shop-standard-v0.6.0b5.figure1.svg" alt="Figure 1a - Runtime Architecture and Threat Overview"></picture>
 
 **Build pipeline**, not drawn in this runtime view: GitHub Actions, GitLab CI. ⑧ A2 · Supply-Chain / Build Attacker → [Figure 1b](#figure-1b).
 
@@ -162,13 +162,13 @@ Role access and finding assignments are listed in [Identified Actors](#identifie
 
 Juice Shop builds in GitHub Actions, GitLab CI. Figure 1b shows the inputs, build systems and release artifacts the repository evidences, with 9 findings attached to them. The highlighted path follows 🟡 [F-056](#f-056) — Dependency Install Scripts Run at Build Time as far as the repository evidences it. The control assessment is in [§6.11](#611-operations-runtime-and-supply-chain-controls).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="security-assessment-juice-shop-thorough-v0.6.0b5.figure1b-dark.svg"><img src="security-assessment-juice-shop-thorough-v0.6.0b5.figure1b.svg" alt="Figure 1b - Supply Chain and Build"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="security-assessment-juice-shop-standard-v0.6.0b5.figure1b-dark.svg"><img src="security-assessment-juice-shop-standard-v0.6.0b5.figure1b.svg" alt="Figure 1b - Supply Chain and Build"></picture>
 
 **Figure 2 - Attack Routes and Impact**
 
 Each numbered route names one example finding from the corresponding Top Threats group with its access prerequisite, the register weakness it is linked to, and the group's potential business harm, which depends on deployment and affected assets. W-IDs in parentheses link the example to an existing weakness. The attack step, affected component and technical consequence are listed in the findings register. Red arrows indicate attacks; dashed red arrows involve a victim; grey arrows lead to potential harm.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="security-assessment-juice-shop-thorough-v0.6.0b5.figure2-dark.svg"><img src="security-assessment-juice-shop-thorough-v0.6.0b5.figure2.svg" alt="Figure 2 - Actors, attack routes, weaknesses and impact"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="security-assessment-juice-shop-standard-v0.6.0b5.figure2-dark.svg"><img src="security-assessment-juice-shop-standard-v0.6.0b5.figure2.svg" alt="Figure 2 - Actors, attack routes, weaknesses and impact"></picture>
 
 **Threat actors.** The actors below drive the numbered attack paths in the figures above. The **Juice Shop User** is the *victim* of client-side attacks (XSS / CSRF), not an attacker. Figure 2 marks victim interaction on the applicable attack routes.
 
@@ -805,7 +805,7 @@ Network-reachable entry points classified by authentication requirement. Each ro
 </tbody>
 </table>
 
-_30 further entry point(s) in this category carry no linked finding and no elevated review signal, and are not listed individually (69 total). The complete route inventory is available in `.route-inventory.json` and, when exported, `pentest-tasks-juice-shop-thorough-v0.6.0b5.yaml`._
+_30 further entry point(s) in this category carry no linked finding and no elevated review signal, and are not listed individually (69 total). The complete route inventory is available in `.route-inventory.json` and, when exported, `pentest-tasks-juice-shop-standard-v0.6.0b5.yaml`._
 
 ### 5.2 Authenticated Entry Points (40)
 
@@ -841,7 +841,7 @@ _30 further entry point(s) in this category carry no linked finding and no eleva
 </tbody>
 </table>
 
-_15 further entry point(s) in this category carry no linked finding and no elevated review signal, and are not listed individually (40 total). The complete route inventory is available in `.route-inventory.json` and, when exported, `pentest-tasks-juice-shop-thorough-v0.6.0b5.yaml`._
+_15 further entry point(s) in this category carry no linked finding and no elevated review signal, and are not listed individually (40 total). The complete route inventory is available in `.route-inventory.json` and, when exported, `pentest-tasks-juice-shop-standard-v0.6.0b5.yaml`._
 
 ---
 

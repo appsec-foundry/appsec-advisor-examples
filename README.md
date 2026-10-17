@@ -30,20 +30,20 @@ Socket.IO, Sequelize, SQLite, and Docker architecture.
 The current assessment was generated on October 17, 2026 with appsec-advisor
 v0.6.0-beta.5 (analysis v5).
 
-- [Markdown report](threat-modeler/security-assessment-juice-shop-thorough-v0.6.0b5.md)
-- [HTML report](threat-modeler/security-assessment-juice-shop-thorough-v0.6.0b5.html)
-- [PDF report](threat-modeler/security-assessment-juice-shop-thorough-v0.6.0b5.pdf)
-- [Structured YAML](threat-modeler/security-assessment-juice-shop-thorough-v0.6.0b5.yaml)
-- [SARIF](threat-modeler/security-assessment-juice-shop-thorough-v0.6.0b5.sarif.json)
-- [Threat Dragon](threat-modeler/security-assessment-juice-shop-thorough-v0.6.0b5.threatdragon.json)
+- [Markdown report](threat-modeler/security-assessment-juice-shop-standard-v0.6.0b5.md)
+- [HTML report](threat-modeler/security-assessment-juice-shop-standard-v0.6.0b5.html)
+- [PDF report](threat-modeler/security-assessment-juice-shop-standard-v0.6.0b5.pdf)
+- [Structured YAML](threat-modeler/security-assessment-juice-shop-standard-v0.6.0b5.yaml)
+- [SARIF](threat-modeler/security-assessment-juice-shop-standard-v0.6.0b5.sarif.json)
+- [Threat Dragon](threat-modeler/security-assessment-juice-shop-standard-v0.6.0b5.threatdragon.json)
 
-The filename retains `thorough`, but the assessment metadata records
+The filename matches the assessment metadata:
 `assessment_depth: standard` and the invocation
 `--assessment-depth standard --hard-budget 30`. Its reasoning profile is
 `sonnet-economy`, with `claude-sonnet-5-5` recorded for the orchestrator,
 STRIDE analysis, triage, and merging.
 
-The [retained Juice Shop pentest plan](threat-modeler/pentest-tasks-juice-shop-thorough-v0.6.0b4.yaml)
+The [retained Juice Shop pentest plan](threat-modeler/pentest-tasks-juice-shop-standard-v0.6.0b4.yaml)
 is a separate beta 4 artifact targeting `http://localhost:3000`; it was not
 generated from the current assessment.
 
